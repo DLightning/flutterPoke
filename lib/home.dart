@@ -31,8 +31,12 @@ class _HomeScreenState extends State<HomeScreen> {
     //  "Ground" : Colors.brown,"Psychic" : Colors.indigo, "Fighting" : Colors.orange,
     //  "Bug" : Colors.lightGreenAccent,"Ghost" : Colors.deepPurple, "Normal" : Colors.black26,
     // };
-    var color = type == "Grass" ? const Color(0xFF9bcc50) : type == "Fire" ? const Color(0xFFfd7d24)
-        : type == "Water" ? const Color(0xFF4592c4)
+    var color = type == "Grass"
+        ? const Color(0xFF9bcc50)
+        : type == "Fire"
+            ? const Color(0xFFfd7d24)
+            : type == "Water"
+                ? const Color(0xFF4592c4)
                 : type == "Poison"
                     ? const Color(0xFFb97fc9)
                     : type == "Electric"
