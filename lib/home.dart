@@ -24,53 +24,47 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Color colorByType(index) {
+  // Define your color map outside of the functions
+  Map<String, Color> colorMap = {
+    "Grass": const Color(0xFF9bcc50),
+    "Fire": const Color(0xFFfd7d24),
+    "Water": const Color(0xFF4592c4),
+    "Poison": const Color(0xFFb97fc9),
+    "Electric": const Color(0xFFeed535),
+    "Rock": const Color(0xFFa38c21),
+    "Ground": const Color(0xFFab9842),
+    "Psychic": const Color(0xFFf366b9),
+    "Fighting": const Color(0xFFd56723),
+    "Bug": const Color(0xFF729f3f),
+    "Ghost": const Color(0xFF7b62a3),
+    "Normal": const Color(0xFFa4acaf),
+    "Fairy": const Color(0xFFfdb9e9),
+    "Steel": const Color(0xFF9eb7b8),
+    "Ice": const Color(0xFF51c4e7),
+    "Dark": const Color(0xFF707070),
+  };
+
+  Color getColorByType(dynamic index) {
     var type = pokedex[index]['type'][0];
-    // const color = { "Grass" : Colors.greenAccent, "Fire" : Colors.redAccent, "Water" : Colors.blue,
-    //  "Poison" : Colors.deepPurpleAccent,"Electric" : Colors.amber, "Rock" : Colors.grey,
-    //  "Ground" : Colors.brown,"Psychic" : Colors.indigo, "Fighting" : Colors.orange,
-    //  "Bug" : Colors.lightGreenAccent,"Ghost" : Colors.deepPurple, "Normal" : Colors.black26,
-    // };
-    var color = type == "Grass"
-        ? const Color(0xFF9bcc50)
-        : type == "Fire"
-            ? const Color(0xFFfd7d24)
-            : type == "Water"
-                ? const Color(0xFF4592c4)
-                : type == "Poison"
-                    ? const Color(0xFFb97fc9)
-                    : type == "Electric"
-                        ? const Color(0xFFeed535)
-                        : type == "Rock"
-                            ? const Color(0xFFa38c21)
-                            : type == "Ground"
-                                ? const Color(0xFFab9842)
-                                : type == "Psychic"
-                                    ? const Color(0xFFf366b9)
-                                    : type == "Fighting"
-                                        ? const Color(0xFFd56723)
-                                        : type == "Bug"
-                                            ? const Color(0xFF729f3f)
-                                            : type == "Ghost"
-                                                ? const Color(0xFF7b62a3)
-                                                : type == "Normal"
-                                                    ? const Color(0xFFa4acaf)
-                                                    : type == "Fairy"
-                                                        ? const Color(
-                                                            0xFFfdb9e9)
-                                                        : type == "Steel"
-                                                            ? const Color(
-                                                                0xFF9eb7b8)
-                                                            : type == "Ice"
-                                                                ? const Color(
-                                                                    0xFF51c4e7)
-                                                                : type == "Dark"
-                                                                    ? const Color(
-                                                                        0xFF707070)
-                                                                    : const Color(
-                                                                        0xFFf16e57);
-    return color;
+
+    // Retrieve the color from the color map
+    var rightColor = colorMap[type] ?? const Color(0xFFf16e57);
+
+    return rightColor;
   }
+
+  /*Color colorByType(index) {
+    var type = pokedex[index]['type'][0];
+    //var color = type == "Grass" ? const Color(0xFF9bcc50) : type == "Fire" ? const Color(0xFFfd7d24)
+    //    : type == "Water" ? const Color(0xFF4592c4) : type == "Poison" ? const Color(0xFFb97fc9)
+    //    : type == "Electric" ? const Color(0xFFeed535) : type == "Rock" ? const Color(0xFFa38c21)
+    //    : type == "Ground" ? const Color(0xFFab9842) : type == "Psychic" ? const Color(0xFFf366b9)
+    //    : type == "Fighting" ? const Color(0xFFd56723) : type == "Bug" ? const Color(0xFF729f3f)
+    //    : type == "Ghost" ? const Color(0xFF7b62a3): type == "Normal" ? const Color(0xFFa4acaf)
+    //    : type == "Fairy" ? const Color(0xFFfdb9e9) : type == "Steel" ? const Color(0xFF9eb7b8)
+    //    : type == "Ice" ? const Color(0xFF51c4e7) : type == "Dark" ? const Color(0xFF707070): const Color(0xFFf16e57);
+    return color;
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     builder: (_) => PokemonDetailScreen(
                                       heroTag: index,
                                       pokemonDetail: pokedex[index],
-                                      color: colorByType(index),
+                                      color: getColorByType(index),
                                     ),
                                   ),
                                 );
@@ -143,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: SafeArea(
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      color: colorByType(index),
+                                      color: getColorByType(index),
                                       borderRadius: const BorderRadius.all(
                                         Radius.circular(20),
                                       ),
