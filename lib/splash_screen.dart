@@ -2,8 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_poke/home.dart';
 
-
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -13,32 +14,47 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      // Após o tempo definido, navegue para a próxima tela
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (BuildContext context) => const HomeScreen(),
-      ));
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          transitionDuration: const Duration(milliseconds: 600),
+          pageBuilder: (context, animation, secondaryAnimation) {
+            return const HomeScreen();
+          },
+          /*transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },*/
+        ),
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.blue,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            Text(
-              'Splash Test PokeApp',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 32.0,
-                fontWeight: FontWeight.bold,
+            Positioned.fill(
+              child: Hero(
+                tag: 'pkball', // Unique tag for the Hero animation
+                child: Image.asset(
+                  'images/pokeball.png',
+                  fit: BoxFit.contain,
+                  //width: 600,
+                ),
               ),
             ),
-            SizedBox(height: 16.0),
-            CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'images/poke.gif',
+                  width: 250, // Adjust the size as needed
+                ),
+              ],
             ),
           ],
         ),

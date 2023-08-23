@@ -46,7 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Color getColorByType(dynamic index) {
     var type = pokedex[index]['type'][0];
-
     // Retrieve the color from the color map
     var rightColor = colorMap[type] ?? const Color(0xFFf16e57);
 
@@ -78,10 +77,13 @@ class _HomeScreenState extends State<HomeScreen> {
           Positioned(
             top: -50,
             right: -50,
-            child: Image.asset(
-              'images/pokeball.png',
-              width: 250,
-              fit: BoxFit.fitHeight,
+            child: Hero(
+              tag: 'pkball',
+              child: Image.asset(
+                'images/pokeball.png',
+                width: 250,
+                fit: BoxFit.fitHeight,
+              ),
             ),
           ),
           Positioned(
